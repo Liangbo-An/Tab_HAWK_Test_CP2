@@ -2378,3 +2378,138 @@ function PWM_list_cases()
     for n = PWM_CASE_MIN, PWM_CASE_MAX do PWM_show_case(n) end
 end
 
+--- Trims the on-chip VREF (VDC_VREF_TRIM[5:0], F8h byte 5) by binary search until AMON reads closest to 0.65 V.
+-- Self-contained: DisplayOff/On reset, AMON mux (GPIO6=1/GPIO3=0/GPIO2=1), SMU2 on/off, and teardown.
+-- FBh/FDh bytes per the "VREF Trim" test plan (CP2); keys F0h/F1h/FCh auto-unlocked by IIC_W_Tab2 -> IIC_Key_Set().
+-- Binary search: endpoints (0, 63) set the monotonic direction, lower_bound converges in ~6 measurements; best voltage tracked so a non-exact target returns the closest code. Requires VREF monotonic in trim code.
+-- Full 34-byte F8h payload written each iteration; only byte 5 changes, isolating VREF as the only variable.
+-- Pass if best_voltage is within 0.637 ~ 0.663 V, else fail.
+-- @return number 0 Success status.
+-- @return string json_data JSON array [best_trim, best_voltage, test_result, target_voltage].
+-- @usage VREF_Trim()           -- run the trim, returns 0 + json results
+function VREF_Trim()
+    local target_voltage = 0.65          -- V, per test plan step 5
+    local vref_min       = 0.637         -- V, pass/fail low  bound
+    local vref_max       = 0.663         -- V, pass/fail high bound
+    local best_trim      = 0
+    local best_voltage   = 0
+    local results        = {}
+
+    ----------------------------------------------------------------
+    -- 1. Display reset (DisplayOff/On) for a clean chip state.
+    ----------------------------------------------------------------
+    DisplayOff()
+    TIME.DELAY(100)
+    DisplayOn()
+
+    ----------------------------------------------------------------
+    -- 2. AMON measurement path (5V on for CBIT relay coils, mux to AMON)
+    ----------------------------------------------------------------
+    PPMU.CAL_EN(0)            -- 5V on
+    GPIO6_A_SET(1)            -- PG_GPIO5 -> X_CBIT3 = 1
+    GPIO3_A_SET(0)            -- PG_GPIO2 -> X_CBIT2 = 0
+    GPIO2_A_SET(1)            -- PG_GPIO1 -> X_CBIT1 = 1 -> U3 Y5 = AMON
+
+    ----------------------------------------------------------------
+    -- 3. Analog mux config per test plan step 4 (FBh EVAL Setting, FDh
+    --    ANALOGTEST).
+    ----------------------------------------------------------------
+    IIC_W_Tab2(0xFB, {0x07,0x2C,0xA5,0x01,0x03,0x00,0x00,0x00,0x00,0x00})  -- EVAL Setting
+    IIC_W_Tab2(0xFD, {0x80, 0x00})          -- ANALOGTEST (AMON = VREF)
+
+    ----------------------------------------------------------------
+    -- 4. SMU2 voltage-measure instrument on AMON, capture leakage
+    ----------------------------------------------------------------
+    Power.ValueSetting.SMU2 = 0
+    SMU2(ON, 1, 0x82)
+    TIME.DELAY(1000)
+    local _, leakageCurrent = POWER.VOL_CUR(P_SMU2)
+    LOG.INFO(string.format("VREF_Trim preset (leakage) current: %f", leakageCurrent))
+
+    ----------------------------------------------------------------
+    -- 5. Build a 34-byte F8h payload with only byte 5 (VREF) varied.
+    ----------------------------------------------------------------
+    local function make_vref_payload(vref_trim)
+        return {
+            0x72,                --1stP   OSC_FTRIM[7:0]
+            0x10,                --2ndP   VDC_VDDPHY_TRIM[4:0]
+            0x10,                --3rdP   VDC_VDDLP_TRIM[4:0]
+            0x10,                --4thP   VDC_VDDPLL_TRIM[4:0]
+            vref_trim & 0x3F,    --5thP   VDC_VREF_TRIM[5:0]
+			-- 6thP ~ 34thP are defaults
+        }
+    end
+
+    ----------------------------------------------------------------
+    -- 6. Binary search for VDC_VREF_TRIM[5:0] (0..63) whose AMON voltage is closest to the 0.65 V target
+    ----------------------------------------------------------------
+    local function measure_vref(code)
+        IIC_W_Tab2(0xF8, make_vref_payload(code))
+        TIME.DELAY(200)
+        local v = POWER.VOL_CUR(P_SMU2)
+        LOG.INFO(string.format("VREF_TRIM=%2d  AMON=%.6f V", code, v))
+        return v
+    end
+
+    local function consider(code, v)
+        if math.abs(v - target_voltage) < math.abs(best_voltage - target_voltage) then
+            best_voltage = v
+            best_trim    = code
+            LOG.INFO(string.format("  -> new best: trim=%d  V=%.6f", best_trim, best_voltage))
+        end
+    end
+
+    -- 6a. endpoints establish the monotonic direction
+    local v_lo = measure_vref(0);   consider(0,  v_lo)
+    local v_hi = measure_vref(63);  consider(63, v_hi)
+    local ascending = (v_lo <= v_hi)
+
+    -- 6b. binary search to the crossover code (lower_bound pattern)
+    local lo, hi = 0, 63
+    while lo < hi do
+        local mid = math.floor((lo + hi) / 2)
+        local v_mid = measure_vref(mid)
+        consider(mid, v_mid)
+        if ascending then
+            -- voltage rises with code; below target -> raise lo, else lower hi
+            if v_mid < target_voltage then lo = mid + 1 else hi = mid end
+        else
+            -- voltage falls with code; below target -> lower hi, else raise lo
+            if v_mid < target_voltage then hi = mid else lo = mid + 1 end
+        end
+    end
+    -- 6c. converged crossover; ensure measured
+    local v_cross = measure_vref(lo); consider(lo, v_cross)
+
+    ----------------------------------------------------------------
+    -- 7. Pass/Fail + datalog (test plan steps 6 & 8)
+    ----------------------------------------------------------------
+    local test_result = (best_voltage >= vref_min and best_voltage <= vref_max) and "PASS" or "FAIL"
+    LOG.INFO(string.format(
+        "VREF_Trim done: best_trim=%d  best_voltage=%.6f V  %s (window %.3f~%.3f)",
+        best_trim, best_voltage, test_result, vref_min, vref_max))
+
+    ----------------------------------------------------------------
+    -- 8. Teardown: inverse of step 2's AMON setup. Release SMU2, deselect
+    --    the AMON mux (GPIO6/3/2 = 0/1/0, the POWER_ON idle state — see
+    --    POWER_CFG.lua), and switch the 5V relay supply back off. F8h is
+    --    left at best_trim (the result to be fused later) on purpose.
+    ----------------------------------------------------------------
+    PPMU.CAL_EN(1)
+    GPIO6_A_SET(0)
+    GPIO3_A_SET(1)
+    GPIO2_A_SET(0)
+    TIME.DELAY(20)
+    SMU2(OFF, 0)
+
+    ----------------------------------------------------------------
+    -- 9. Return json: [best_trim, best_voltage, test_result, target_voltage]
+    ----------------------------------------------------------------
+    table.insert(results, best_trim)
+    table.insert(results, best_voltage)
+    table.insert(results, test_result)
+    table.insert(results, target_voltage)
+    local json_data = cjson.encode(results)
+    LOG.INFO(json_data)
+    return 0, json_data
+end
