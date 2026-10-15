@@ -14,7 +14,7 @@ Display = {
         vs         = 3,--8,      -- 垂直同步宽度
         vsync_pola = 0,      -- 垂直同步极性
         
-        vrefresh   = 30,     -- 刷新率(Hz)
+        vrefresh   = 45,     -- 刷新率(Hz)
         Lane       = 2,      -- MIPI通道数
         clock      = 0       -- 时钟配置
     },
