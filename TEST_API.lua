@@ -23,77 +23,77 @@ raw_values = {}  --efuse缓存值
 bit8 = (DAC_calibration_code >> 8) & 0x01
 byte_low = DAC_calibration_code & 0xFF
 DAC_cal_buf = {
-	0x72,             --1stP
-	0x10,             --2ndP
-	0x10,             --3rdP
-	0x10,             --4thP
-	0x20,             --5thP
-	0x10,             --6thP
-	0x10,             --7thP
-	0x25,             --8thP
-	0x0A,             --9thP
-	0x0A,             --10thP
-	0x03,             --11thP
-	0x11,             --12thP
-	0x20,             --13thP
-	bit8,             --14thP  PBIAS_IPXL_TRIM[8]
-	byte_low,         --15thP  PBIAS_IPXL_TRIM[7:0]
-	0x08,             --16thP
-	0x08,             --17thP
-	0x10,             --18thP
-	0x00,             --19thP
-	0x00,             --20thP
-	0x00,             --21thP
-	0x00,             --22thP
-	0x00,             --23thP
-	0x00,             --24thP
-	0x20,             --25thP
-	0x20,             --26thP
-	0x20,             --27thP
-	0x20,             --28thP
-	0x88,             --29thP
-	0x02,             --30thP
-	0x00,             --31thP
-	0x02,             --32thP
-	0x00,             --33thp
-	0x00              --34thp
+	0x72,  --1stP
+	0x10,  --2ndP
+	0x10,  --3rdP
+	0x10,  --4thP
+	0x20,  --5thP
+	0x10,  --6thP
+	0x10,  --7thP
+	0x25,  --8thP
+	0x0A,  --9thP
+	0x0A,  --10thP
+	0x03,  --11thP
+	0x11,  --12thP
+	0x20,  --13thP
+	bit8,  --14thP  PBIAS_IPXL_TRIM[8]
+	byte_low, --15thP  PBIAS_IPXL_TRIM[7:0]
+	0x08,  --16thP
+	0x08,  --17thP
+	0x10,  --18thP
+	0x00,  --19thP
+	0x00,  --20thP
+	0x00,  --21thP
+	0x00,  --22thP
+	0x00,  --23thP
+	0x00,  --24thP
+	0x20,  --25thP
+	0x20,  --26thP
+	0x20,  --27thP
+	0x20,  --28thP
+	0x88,  --29thP
+	0x02,  --30thP
+	0x00,  --31thP
+	0x02,  --32thP
+	0x00,  --33thp
+	0x00   --34thp
 }
 
 Temperature_TRIM_buf = {
-	0x72,                  --1stP
-	0x10,                  --2ndP
-	0x10,                  --3rdP
-	0x10,                  --4thP
-	0x20,                  --5thP
-	0x10,                  --6thP
-	0x10,                  --7thP
-	0x25,                  --8thP
-	0x0A,                  --9thP
-	0x0A,                  --10thP
-	0x03,                  --11thP
-	0x11,                  --12thP
-	0x20,                  --13thP
-	0x01,                  --14thP  PBIAS_IPXL_TRIM[8]
-	0x00,                  --15thP  PBIAS_IPXL_TRIM[7:0]
-	0x08,                  --16thP
-	0x08,                  --17thP
-	0x10,                  --18thP
-	0x00,                  --19thP
-	0x00,                  --20thP
-	0x00,                  --21thP
-	0x00,                  --22thP
-	0x00,                  --23thP
-	0x00,                  --24thP
-	0x20,                  --25thP
-	0x20,                  --26thP
-	0x20,                  --27thP
-	0x20,                  --28thP
-	0x88,                  --29thP
-	TSL_TRIM_High,         --30thP TSL_TRIM_TARGET[9:8]
-	TSL_TRIM_Low,          --31thP	TSL_TRIM_TARGET[7:0]
-	TSR_TRIM_High,         --32thP TSR_TRIM_TARGET[9:8]
-	TSR_TRIM_Low,          --33thp  TSR_TRIM_TARGET[7:0]
-	0x00                   --34thp
+	0x72,       --1stP
+	0x10,       --2ndP
+	0x10,       --3rdP
+	0x10,       --4thP
+	0x20,       --5thP
+	0x10,       --6thP
+	0x10,       --7thP
+	0x25,       --8thP
+	0x0A,       --9thP
+	0x0A,       --10thP
+	0x03,       --11thP
+	0x11,       --12thP
+	0x20,       --13thP
+	0x01,       --14thP  PBIAS_IPXL_TRIM[8]
+	0x00,       --15thP  PBIAS_IPXL_TRIM[7:0]
+	0x08,       --16thP
+	0x08,       --17thP
+	0x10,       --18thP
+	0x00,       --19thP
+	0x00,       --20thP
+	0x00,       --21thP
+	0x00,       --22thP
+	0x00,       --23thP
+	0x00,       --24thP
+	0x20,       --25thP
+	0x20,       --26thP
+	0x20,       --27thP
+	0x20,       --28thP
+	0x88,       --29thP
+	TSL_TRIM_High, --30thP TSL_TRIM_TARGET[9:8]
+	TSL_TRIM_Low, --31thP	TSL_TRIM_TARGET[7:0]
+	TSR_TRIM_High, --32thP TSR_TRIM_TARGET[9:8]
+	TSR_TRIM_Low, --33thp  TSR_TRIM_TARGET[7:0]
+	0x00        --34thp
 }
 
 
@@ -140,8 +140,8 @@ function Power_Shorts_Test(Volt, delay, pinlist)
 	local current = {}
 
 	if Volt == nil or delay == nil or pinlist == nil then
-		local VOLTAGE_VALUE = 100    --mV
-		local VOLTAGE_CLAMP = 200    --mV
+		local VOLTAGE_VALUE = 100        --mV
+		local VOLTAGE_CLAMP = 200        --mV
 		local CURRENT_CLAMP = 20 * 1000 * 1000 --nA
 		local UNDER_VOLTAGE_PROTECTIVE = 0 --mV
 		local UNDER_CURRENT_PROTECTIVE = 0 --mV
@@ -179,17 +179,17 @@ function Power_Shorts_Test(Volt, delay, pinlist)
 
 		TIME.DELAY(300)
 		--3. Measure & Report current at VDD10,VDD18,AVEE,VQPS
-		VQPS_DATA_VOLTAGE, VQPS_DATA_CURRENT    = POWER.VOL_CUR(P_VQPS)
-		VDD18_DATA_VOLTAGE, VDD18_DATA_CURRENT  = POWER.VOL_CUR(P_VDD18)
-		VDD10_DATA_VOLTAGE, VDD10_DATA_CURRENT  = POWER.VOL_CUR(P_VDD10)
+		VQPS_DATA_VOLTAGE, VQPS_DATA_CURRENT     = POWER.VOL_CUR(P_VQPS)
+		VDD18_DATA_VOLTAGE, VDD18_DATA_CURRENT   = POWER.VOL_CUR(P_VDD18)
+		VDD10_DATA_VOLTAGE, VDD10_DATA_CURRENT   = POWER.VOL_CUR(P_VDD10)
 		AVDD18_DATA_VOLTAGE, AVDD18_DATA_CURRENT = POWER.VOL_CUR(P_AVDD18) --20251222add
-		AVEE_DATA_VOLTAGE, AVEE_DATA_CURRENT    = POWER.VOL_CUR(P_AVEE)
+		AVEE_DATA_VOLTAGE, AVEE_DATA_CURRENT     = POWER.VOL_CUR(P_AVEE)
 
-		VQPS_DATA_CURRENT                       = VQPS_DATA_CURRENT / 1e6
-		VDD10_DATA_CURRENT                      = VDD10_DATA_CURRENT / 1e6
-		VDD18_DATA_CURRENT                      = VDD18_DATA_CURRENT / 1e6
-		AVEE_DATA_CURRENT                       = AVEE_DATA_CURRENT / 1e6
-		AVDD18_DATA_CURRENT                     = AVDD18_DATA_CURRENT / 1e6 --20251222add
+		VQPS_DATA_CURRENT                        = VQPS_DATA_CURRENT / 1e6
+		VDD10_DATA_CURRENT                       = VDD10_DATA_CURRENT / 1e6
+		VDD18_DATA_CURRENT                       = VDD18_DATA_CURRENT / 1e6
+		AVEE_DATA_CURRENT                        = AVEE_DATA_CURRENT / 1e6
+		AVDD18_DATA_CURRENT                      = AVDD18_DATA_CURRENT / 1e6 --20251222add
 
 		POWER_OFF()
 
@@ -217,7 +217,7 @@ function Power_Shorts_Test(Volt, delay, pinlist)
 		local VOLTAGE_VALUE = Volt
 		local delaytime = delay
 		--local power_pchannel = pinlist
-		local VOLTAGE_CLAMP = 200    --mV
+		local VOLTAGE_CLAMP = 200        --mV
 		local CURRENT_CLAMP = 20 * 1000 * 1000 --nA
 		local DATA_VOLTAGE = 0.0
 		local DATA_CURRENT = 0.0
@@ -707,15 +707,15 @@ function VPG_9SQUARE_FRC(cx, cy, ox, oy)
 
 		-- 29~32 中心十字坐标（传入参数）
 		(cx >> 8) & 0x07, --29 PG_CROSS_CENTER_X[10:8]
-		cx & 0xFF,        --30 PG_CROSS_CENTER_X[7:0]
+		cx & 0xFF,  --30 PG_CROSS_CENTER_X[7:0]
 		(cy >> 8) & 0x07, --31 PG_CROSS_CENTER_Y[10:8]
-		cy & 0xFF,        --32 PG_CROSS_CENTER_Y[7:0]
+		cy & 0xFF,  --32 PG_CROSS_CENTER_Y[7:0]
 
 		-- 33~36 十字偏移量
 		(ox >> 8) & 0x07, --33 PG_CROSS_OFFSET_X[10:8]
-		ox & 0xFF,        --34 PG_CROSS_OFFSET_X[7:0]
+		ox & 0xFF,  --34 PG_CROSS_OFFSET_X[7:0]
 		(oy >> 8) & 0x07, --35 PG_CROSS_OFFSET_Y[10:8]
-		oy & 0xFF         --36 PG_CROSS_OFFSET_Y[7:0]
+		oy & 0xFF   --36 PG_CROSS_OFFSET_Y[7:0]
 	}
 
 	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x3f })
@@ -770,15 +770,15 @@ function VPG_9POINT_FRC(cx, cy, ox, oy)
 
 		-- 21~24 中心十字坐标（传入参数）
 		(cx >> 8) & 0x07, --21 PG_CROSS_CENTER_X[10:8]
-		cx & 0xFF,        --22 PG_CROSS_CENTER_X[7:0]
+		cx & 0xFF,  --22 PG_CROSS_CENTER_X[7:0]
 		(cy >> 8) & 0x07, --23 PG_CROSS_CENTER_Y[10:8]
-		cy & 0xFF,        --24 PG_CROSS_CENTER_Y[7:0]
+		cy & 0xFF,  --24 PG_CROSS_CENTER_Y[7:0]
 
 		-- 25~28 十字偏移量
 		(ox >> 8) & 0x07, --25 PG_CROSS_OFFSET_X[10:8]
-		ox & 0xFF,        --26 PG_CROSS_OFFSET_X[7:0]
+		ox & 0xFF,  --26 PG_CROSS_OFFSET_X[7:0]
 		(oy >> 8) & 0x07, --27 PG_CROSS_OFFSET_Y[10:8]
-		oy & 0xFF         --28 PG_CROSS_OFFSET_Y[7:0]
+		oy & 0xFF   --28 PG_CROSS_OFFSET_Y[7:0]
 	}
 
 	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x7f })
@@ -1026,40 +1026,40 @@ function DAC_Full_Range_Calibration()
 		local byte_low = trim_val & 0xFF
 
 		local trim_buf = {
-			0x72,     --1stP
-			0x10,     --2ndP
-			0x10,     --3rdP
-			0x10,     --4thP
-			0x20,     --5thP
-			0x10,     --6thP
-			0x10,     --7thP
-			0x25,     --8thP
-			0x0A,     --9thP
-			0x0A,     --10thP
-			0x03,     --11thP
-			0x11,     --12thP
-			0x20,     --13thP
-			bit8,     --14thP  PBIAS_IPXL_TRIM[8]
+			0x72, --1stP
+			0x10, --2ndP
+			0x10, --3rdP
+			0x10, --4thP
+			0x20, --5thP
+			0x10, --6thP
+			0x10, --7thP
+			0x25, --8thP
+			0x0A, --9thP
+			0x0A, --10thP
+			0x03, --11thP
+			0x11, --12thP
+			0x20, --13thP
+			bit8, --14thP  PBIAS_IPXL_TRIM[8]
 			byte_low, --15thP  PBIAS_IPXL_TRIM[7:0]
-			0x08,     --16thP
-			0x08,     --17thP
-			0x10,     --18thP
-			0x00,     --19thP
-			0x00,     --20thP
-			0x00,     --21thP
-			0x00,     --22thP
-			0x00,     --23thP
-			0x00,     --24thP
-			0x20,     --25thP
-			0x20,     --26thP
-			0x20,     --27thP
-			0x20,     --28thP
-			0x88,     --29thP
-			0x02,     --30thP
-			0x00,     --31thP
-			0x02,     --32thP
-			0x00,     --33thp
-			0x00      --34thp
+			0x08, --16thP
+			0x08, --17thP
+			0x10, --18thP
+			0x00, --19thP
+			0x00, --20thP
+			0x00, --21thP
+			0x00, --22thP
+			0x00, --23thP
+			0x00, --24thP
+			0x20, --25thP
+			0x20, --26thP
+			0x20, --27thP
+			0x20, --28thP
+			0x88, --29thP
+			0x02, --30thP
+			0x00, --31thP
+			0x02, --32thP
+			0x00, --33thp
+			0x00 --34thp
 		}
 
 		IIC_W_Tab2(0xF8, trim_buf) --Trim
@@ -1148,40 +1148,40 @@ function DAC_Full_Range_Calibration_M()
 		local byte_low = trim_val & 0xFF
 
 		local trim_buf = {
-			0x72,     --1stP
-			0x10,     --2ndP
-			0x10,     --3rdP
-			0x10,     --4thP
-			0x20,     --5thP
-			0x10,     --6thP
-			0x10,     --7thP
-			0x25,     --8thP
-			0x0A,     --9thP
-			0x0A,     --10thP
-			0x03,     --11thP
-			0x11,     --12thP
-			0x20,     --13thP
-			bit8,     --14thP  PBIAS_IPXL_TRIM[8]
+			0x72, --1stP
+			0x10, --2ndP
+			0x10, --3rdP
+			0x10, --4thP
+			0x20, --5thP
+			0x10, --6thP
+			0x10, --7thP
+			0x25, --8thP
+			0x0A, --9thP
+			0x0A, --10thP
+			0x03, --11thP
+			0x11, --12thP
+			0x20, --13thP
+			bit8, --14thP  PBIAS_IPXL_TRIM[8]
 			byte_low, --15thP  PBIAS_IPXL_TRIM[7:0]
-			0x08,     --16thP
-			0x08,     --17thP
-			0x10,     --18thP
-			0x00,     --19thP
-			0x00,     --20thP
-			0x00,     --21thP
-			0x00,     --22thP
-			0x00,     --23thP
-			0x00,     --24thP
-			0x20,     --25thP
-			0x20,     --26thP
-			0x20,     --27thP
-			0x20,     --28thP
-			0x88,     --29thP
-			0x02,     --30thP
-			0x00,     --31thP
-			0x02,     --32thP
-			0x00,     --33thp
-			0x00      --34thp
+			0x08, --16thP
+			0x08, --17thP
+			0x10, --18thP
+			0x00, --19thP
+			0x00, --20thP
+			0x00, --21thP
+			0x00, --22thP
+			0x00, --23thP
+			0x00, --24thP
+			0x20, --25thP
+			0x20, --26thP
+			0x20, --27thP
+			0x20, --28thP
+			0x88, --29thP
+			0x02, --30thP
+			0x00, --31thP
+			0x02, --32thP
+			0x00, --33thp
+			0x00 --34thp
 		}
 
 		IIC_W_Tab2(0xF8, trim_buf) --TRIM
@@ -1313,9 +1313,9 @@ function DAC_2point_calibration()
 	-- 3. Power up and measurement path
 	--    (sequence matches the Full Range function that is known to work)
 	----------------------------------------------------------------
-	GPIO6_A_SET(1)                    -- PG_GPIO5 -> X_CBIT3 = 1
-	GPIO3_A_SET(0)                    -- PG_GPIO2 -> X_CBIT2 = 0
-	GPIO2_A_SET(1)                    -- PG_GPIO1 -> X_CBIT1 = 1   -> U3 Y5 = AMON
+	GPIO6_A_SET(1)                      -- PG_GPIO5 -> X_CBIT3 = 1
+	GPIO3_A_SET(0)                      -- PG_GPIO2 -> X_CBIT2 = 0
+	GPIO2_A_SET(1)                      -- PG_GPIO1 -> X_CBIT1 = 1   -> U3 Y5 = AMON
 
 	IIC_W_Tab2(0xFD, { 0x00, 0x00, 0x00 }) -- clear FDh first
 	IIC_R_Tab2(0xFD, 3)
@@ -1470,11 +1470,11 @@ function Temperature_Sensor_Thermometer()
 
 	-- 温度控制寄存器配置
 	IIC_W_Tab2(0xE0,
-		{ 0x30, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x30, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x30, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x30, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	IIC_W_Tab2(0xE0,
-		{ 0x78, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x78, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x78, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x78, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	IIC_W_Tab2(0xE0,
-		{ 0x70, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x70, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x70, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x70, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	--IIC_W_Tab2(0xE0,0x70)
 
 	--Temperature_TRIM_buf[30]  = 0x1
@@ -1489,13 +1489,13 @@ function Temperature_Sensor_Thermometer()
 	-- rData[2] → 2nd P: TSL_DATA_OUT[7:0]
 	-- rData[3] → 3rd P: TSR_DATA_OUT[9:8]
 	-- rData[4] → 4th P: TSR_DATA_OUT[7:0]
-	local tsl_high   = readData[1] & 0x03 -- 低2bit
-	local tsl_low    = readData[2] & 0xFF
-	local TSL_CODE   = (tsl_high << 8) | tsl_low
+	local tsl_high    = readData[1] & 0x03 -- 低2bit
+	local tsl_low     = readData[2] & 0xFF
+	local TSL_CODE    = (tsl_high << 8) | tsl_low
 
-	local tsr_high   = readData[3] & 0x03 -- 低2bit
-	local tsr_low    = readData[4] & 0xFF
-	local TSR_CODE   = (tsr_high << 8) | tsr_low
+	local tsr_high    = readData[3] & 0x03 -- 低2bit
+	local tsr_low     = readData[4] & 0xFF
+	local TSR_CODE    = (tsr_high << 8) | tsr_low
 
 
 	local function Code2Temp(code)
@@ -1716,7 +1716,7 @@ function Set_Duty_Cycle(target_duty)
 
 	-- PWM_TYP_MULTI_VAL[9:8] 高2bit；[7:0]低8bit
 	local high2            = math.floor(raw_int / (2 ^ 8)) -- bit9 bit8
-	local low8             = raw_int % 256    -- bit7~bit0
+	local low8             = raw_int % 256              -- bit7~bit0
 
 
 	--IIC_W_Tab2(0xE5,{0x00,0x2A,0x80,0x01,0x54,0x00,0x40,high2,low8,0x00,0x00,0x00,0x00})  --PWM Timing Gen
@@ -2008,11 +2008,11 @@ function Temperature_Sensor_ADC()
 
 	-- 温度控制寄存器配置
 	IIC_W_Tab2(0xE0,
-		{ 0x30, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x30, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x30, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x30, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	IIC_W_Tab2(0xE0,
-		{ 0x78, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x78, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x78, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x78, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	IIC_W_Tab2(0xE0,
-		{ 0x70, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x70, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F })         --Temperature Control
+		{ 0x70, 0x82, 0x00, 0x40, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0xCF, 0x70, 0x82, 0x00, 0x41, 0x14, 0x00, 0x02, 0xA0, 0x02, 0xA0, 0x01, 0xB0, 0x1F }) --Temperature Control
 	--IIC_W_Tab2(0xE0,0x70)
 
 	local _, readData = IIC_R_Tab2(0xE1, 4)
@@ -2020,13 +2020,13 @@ function Temperature_Sensor_ADC()
 	-- rData[2] → 2nd P: TSL_DATA_OUT[7:0]
 	-- rData[3] → 3rd P: TSR_DATA_OUT[9:8]
 	-- rData[4] → 4th P: TSR_DATA_OUT[7:0]
-	local tsl_high   = readData[1] & 0x03 -- 低2bit
-	local tsl_low    = readData[2] & 0xFF
-	local TSL_CODE   = (tsl_high << 8) | tsl_low
+	local tsl_high    = readData[1] & 0x03 -- 低2bit
+	local tsl_low     = readData[2] & 0xFF
+	local TSL_CODE    = (tsl_high << 8) | tsl_low
 
-	local tsr_high   = readData[3] & 0x03 -- 低2bit
-	local tsr_low    = readData[4] & 0xFF
-	local TSR_CODE   = (tsr_high << 8) | tsr_low
+	local tsr_high    = readData[3] & 0x03 -- 低2bit
+	local tsr_low     = readData[4] & 0xFF
+	local TSR_CODE    = (tsr_high << 8) | tsr_low
 
 
 	--local function Code2Temp(code)
@@ -2064,15 +2064,15 @@ end
 
 -- Set PWM timing
 function PWM_timing_from_Sapien_092326()
-	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                -- level2 key
-	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                --OTP key
-	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                --3rd key
+	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                      -- level2 key
+	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                      --OTP key
+	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                      --3rd key
 
-	IIC_W_Tab2(0xE3, { 0x01 })                      --Content Monitor Off
+	IIC_W_Tab2(0xE3, { 0x01 })                            --Content Monitor Off
 	IIC_W_Tab2(0xE4, { 0x00, 0x08, 0x08, 0x0B, 0x14, 0x00 }) --System Clock <= 200MHz : PWM Pulse width (Min. PWM 400ns-CAP)
-	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })    --Image start position
-	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x7f })          --GLBC (Pixel Driver Current : 0.2uA)
-	IIC_W_Tab2(0xE5, { 0x00, 0x36, 0xB0, 0x02, 0xBC }) --(Frame Rate 90Hz) PWM_Start_Offset, PWM_HCLOCK
+	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })          --Image start position
+	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x7f })                --GLBC (Pixel Driver Current : 0.2uA)
+	IIC_W_Tab2(0xE5, { 0x00, 0x36, 0xB0, 0x02, 0xBC })    --(Frame Rate 90Hz) PWM_Start_Offset, PWM_HCLOCK
 
 	IIC_R_Tab2(0xE3, 1)
 	IIC_R_Tab2(0xE4, 6)
@@ -2083,16 +2083,16 @@ function PWM_timing_from_Sapien_092326()
 end
 
 function PWM_timing_from_Sapien_092526()
-	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                                    -- level2 key
-	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                                    --OTP key
-	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                                    --3rd key
+	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                                              -- level2 key
+	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                                              --OTP key
+	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                                              --3rd key
 
-	IIC_W_Tab2(0xE3, { 0x01 })                                          --Content Monitor Off
-	IIC_W_Tab2(0xE4, { 0x00, 0x08, 0x08, 0x0B, 0x14, 0x00 })            --System Clock <= 200MHz : PWM Pulse width (Min. PWM 400ns-CAP)
-	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })                        --Image start position
-	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x0A })                              --GLBC (Pixel Driver Current : 0.2uA)
+	IIC_W_Tab2(0xE3, { 0x01 })                                                    --Content Monitor Off
+	IIC_W_Tab2(0xE4, { 0x00, 0x08, 0x08, 0x0B, 0x14, 0x00 })                      --System Clock <= 200MHz : PWM Pulse width (Min. PWM 400ns-CAP)
+	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })                                  --Image start position
+	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0x0A })                                        --GLBC (Pixel Driver Current : 0.2uA)
 	IIC_W_Tab2(0xE5, { 0x00, 0x36, 0xB0, 0x02, 0xBC, 0x00, 0x40, 0x00, 0x80, 0x01 }) --(Frame Rate 90Hz) PWM_Start_Offset, PWM_HCLOCK, EOTF Bypass
-	VPG_SetFlatField(0)                                                 --display on first picture  flat field
+	VPG_SetFlatField(0)                                                           --display on first picture  flat field
 
 	IIC_R_Tab2(0xE3, 1)
 	IIC_R_Tab2(0xE4, 6)
@@ -2104,16 +2104,16 @@ function PWM_timing_from_Sapien_092526()
 end
 
 function PWM_timing_from_Sapien_092826()
-	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                -- level2 key
-	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                --OTP key
-	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                --3rd key
+	IIC_W_Tab2(0xF0, { 0x5a, 0x5a })                      -- level2 key
+	IIC_W_Tab2(0xF1, { 0x5a, 0x5a })                      --OTP key
+	IIC_W_Tab2(0xFC, { 0x5a, 0x5a })                      --3rd key
 
-	IIC_W_Tab2(0xE3, { 0x01 })                      --Content Monitor Off
+	IIC_W_Tab2(0xE3, { 0x01 })                            --Content Monitor Off
 	IIC_W_Tab2(0xE4, { 0x00, 0x0a, 0x0c, 0x0e, 0x18, 0x00 }) --System Clock <= 200MHz : PWM Pulse width (Min. PWM 400ns-CAP)
-	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })    --Image start position
-	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0xff })          --GLBC (Pixel Driver Current : 0.2uA)
-	IIC_W_Tab2(0xE5, { 0x00, 0x36, 0xB0, 0x02, 0xBC }) --(Frame Rate 90Hz) PWM_Start_Offset, PWM_HCLOCK, EOTF Bypass
-	VPG_SetFlatField(0)                             --display on first picture  flat field
+	IIC_W_Tab2(0xB4, { 0x00, 0x00, 0x00, 0x00 })          --Image start position
+	IIC_W_Tab2(0xF6, { 0x00, 0x00, 0xff })                --GLBC (Pixel Driver Current : 0.2uA)
+	IIC_W_Tab2(0xE5, { 0x00, 0x36, 0xB0, 0x02, 0xBC })    --(Frame Rate 90Hz) PWM_Start_Offset, PWM_HCLOCK, EOTF Bypass
+	VPG_SetFlatField(0)                                   --display on first picture  flat field
 
 	IIC_R_Tab2(0xE3, 1)
 	IIC_R_Tab2(0xE4, 6)
@@ -2290,8 +2290,8 @@ function PWM_timing_debug(e4, fa)
 	IIC_W_Tab2(0xE4, e4) -- System Clock <= 200MHz : PWM pulse width
 	IIC_W_Tab2(0xFA, fa)
 
-	IIC_R_Tab2(0xE4, 6)      -- readback
-	IIC_R_Tab2(0xFA, 2)      -- readback
+	IIC_R_Tab2(0xE4, 6)     -- readback
+	IIC_R_Tab2(0xFA, 2)     -- readback
 
 	IIC_W_Tab2(0xF4, { 0x01 }) -- panel update
 end
@@ -2331,7 +2331,7 @@ end
 -- @return string json_data JSON array [best_trim, best_voltage, test_result, target_voltage].
 -- @usage VREF_Trim()           -- run the trim, returns 0 + json results
 function VREF_Trim()
-	local target_voltage = 0.65  -- V, per test plan step 5
+	local target_voltage = 0.65 -- V, per test plan step 5
 	local vref_min       = 0.637 -- V, pass/fail low  bound
 	local vref_max       = 0.663 -- V, pass/fail high bound
 	local best_trim      = 0
@@ -2358,13 +2358,14 @@ function VREF_Trim()
 	--    ANALOGTEST).
 	----------------------------------------------------------------
 	IIC_W_Tab2(0xFB, { 0x07, 0x2C, 0xA5, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00 }) -- EVAL Setting
-	IIC_W_Tab2(0xFD, { 0x80, 0x00 })                                      -- ANALOGTEST (AMON = VREF)
+	IIC_W_Tab2(0xFD, { 0x80, 0x00 })                                              -- ANALOGTEST (AMON = VREF)
 
 	----------------------------------------------------------------
-	-- 4. SMU2 voltage-measure instrument on AMON, capture leakage
+	-- 4. SMU2 current-measure preset on AMON: MODE 0 = voltage output
+	--    (force 0 V); POWER.VOL_CUR's 2nd return is the measured current.
 	----------------------------------------------------------------
 	Power.ValueSetting.SMU2 = 0
-	SMU2(ON, 1, 0x82)
+	SMU2(ON, 0, 0x82)
 	TIME.DELAY(1000)
 	local _, leakageCurrent = POWER.VOL_CUR(P_SMU2)
 	LOG.INFO(string.format("VREF_Trim preset (leakage) current: %f", leakageCurrent))
@@ -2374,10 +2375,10 @@ function VREF_Trim()
 	----------------------------------------------------------------
 	local function make_vref_payload(vref_trim)
 		return {
-			0x72,             --1stP   OSC_FTRIM[7:0]
-			0x10,             --2ndP   VDC_VDDPHY_TRIM[4:0]
-			0x10,             --3rdP   VDC_VDDLP_TRIM[4:0]
-			0x10,             --4thP   VDC_VDDPLL_TRIM[4:0]
+			0x72,    --1stP   OSC_FTRIM[7:0]
+			0x10,    --2ndP   VDC_VDDPHY_TRIM[4:0]
+			0x10,    --3rdP   VDC_VDDLP_TRIM[4:0]
+			0x10,    --4thP   VDC_VDDPLL_TRIM[4:0]
 			vref_trim & 0x3F, --5thP   VDC_VREF_TRIM[5:0]
 			-- 6thP ~ 34thP are defaults
 		}
@@ -2386,6 +2387,12 @@ function VREF_Trim()
 	----------------------------------------------------------------
 	-- 6. Binary search for VDC_VREF_TRIM[5:0] (0..63) whose AMON voltage is closest to the 0.65 V target
 	----------------------------------------------------------------
+	-- Switch SMU2 to voltmeter: MODE 1 = current output (force 0 A);
+	-- POWER.VOL_CUR's 1st return is then the measured AMON voltage.
+	Power.ValueSetting.SMU2 = 0
+	SMU2(ON, 1, 0x82)
+	TIME.DELAY(1000)
+
 	local function measure_vref(code)
 		IIC_W_Tab2(0xF8, make_vref_payload(code))
 		TIME.DELAY(200)
