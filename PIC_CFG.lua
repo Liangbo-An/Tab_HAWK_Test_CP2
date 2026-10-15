@@ -29,7 +29,7 @@ Folder = "./textures_1/"
 
 imIndex = 1
 LOG.INFO(imIndex)
-bist_mode = 0	--1:bistmode, 0:PG
+bist_mode = 1	--1:bistmode, 0:PG
 
 function Next()
 	if imIndex >= #imShow then
